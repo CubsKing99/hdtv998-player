@@ -1,0 +1,24 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Express 2013 for Windows Desktop
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Board 973", "Board 973.vbproj", "{87CE81F6-CCBB-4AE9-BACE-3DFB375FF4B6}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8C68609D-50EC-4746-A323-9A88B5AA20E4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{87CE81F6-CCBB-4AE9-BACE-3DFB375FF4B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{87CE81F6-CCBB-4AE9-BACE-3DFB375FF4B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{87CE81F6-CCBB-4AE9-BACE-3DFB375FF4B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{87CE81F6-CCBB-4AE9-BACE-3DFB375FF4B6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
