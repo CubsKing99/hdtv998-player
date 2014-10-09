@@ -43,10 +43,6 @@ Partial Class frmMain
     Me.dgcFileName = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.dgcStartPercent = New System.Windows.Forms.DataGridViewTextBoxColumn()
     Me.dgcEndPercent = New System.Windows.Forms.DataGridViewTextBoxColumn()
-    Me.lblFileName = New System.Windows.Forms.Label()
-    Me.btnBrowse = New System.Windows.Forms.Button()
-    Me.lblStartPercent = New System.Windows.Forms.Label()
-    Me.lblEndPercent = New System.Windows.Forms.Label()
     Me.lblSkipPercent = New System.Windows.Forms.Label()
     Me.lblFFPercent = New System.Windows.Forms.Label()
     Me.btnSkipFwd = New System.Windows.Forms.Button()
@@ -58,18 +54,12 @@ Partial Class frmMain
     Me.chkAbsolutePosition = New System.Windows.Forms.CheckBox()
     Me.nudSkipPercent = New System.Windows.Forms.NumericUpDown()
     Me.nudFFPercent = New System.Windows.Forms.NumericUpDown()
-    Me.nudEndPercent = New System.Windows.Forms.NumericUpDown()
-    Me.nudStartPercent = New System.Windows.Forms.NumericUpDown()
-    Me.txtFileName = New System.Windows.Forms.TextBox()
-    Me.chkContinuousPlayback = New System.Windows.Forms.CheckBox()
     Me.nudSubChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudCard = New System.Windows.Forms.NumericUpDown()
     CType(Me.dgvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudSkipPercent, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudFFPercent, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.nudEndPercent, System.ComponentModel.ISupportInitialize).BeginInit()
-    CType(Me.nudStartPercent, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudSubChannel, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudChannel, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudCard, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -105,8 +95,7 @@ Partial Class frmMain
     '
     'txtStatus
     '
-    Me.txtStatus.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
-            Or System.Windows.Forms.AnchorStyles.Left) _
+    Me.txtStatus.Anchor = CType(((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left) _
             Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.txtStatus.Location = New System.Drawing.Point(75, 317)
     Me.txtStatus.Multiline = True
@@ -117,12 +106,13 @@ Partial Class frmMain
     '
     'dlgOpenFiles
     '
+    Me.dlgOpenFiles.Multiselect = True
     Me.dlgOpenFiles.SupportMultiDottedExtensions = True
     Me.dlgOpenFiles.Title = "Select File(s) to Play"
     '
     'btnPlay
     '
-    Me.btnPlay.Location = New System.Drawing.Point(15, 111)
+    Me.btnPlay.Location = New System.Drawing.Point(15, 132)
     Me.btnPlay.Name = "btnPlay"
     Me.btnPlay.Size = New System.Drawing.Size(75, 23)
     Me.btnPlay.TabIndex = 6
@@ -131,7 +121,7 @@ Partial Class frmMain
     '
     'btnPause
     '
-    Me.btnPause.Location = New System.Drawing.Point(96, 111)
+    Me.btnPause.Location = New System.Drawing.Point(96, 132)
     Me.btnPause.Name = "btnPause"
     Me.btnPause.Size = New System.Drawing.Size(75, 23)
     Me.btnPause.TabIndex = 7
@@ -140,7 +130,7 @@ Partial Class frmMain
     '
     'btnStop
     '
-    Me.btnStop.Location = New System.Drawing.Point(176, 111)
+    Me.btnStop.Location = New System.Drawing.Point(176, 132)
     Me.btnStop.Name = "btnStop"
     Me.btnStop.Size = New System.Drawing.Size(75, 23)
     Me.btnStop.TabIndex = 8
@@ -149,47 +139,47 @@ Partial Class frmMain
     '
     'btnAdd
     '
-    Me.btnAdd.Location = New System.Drawing.Point(12, 279)
+    Me.btnAdd.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+    Me.btnAdd.Location = New System.Drawing.Point(12, 288)
     Me.btnAdd.Name = "btnAdd"
     Me.btnAdd.Size = New System.Drawing.Size(75, 23)
     Me.btnAdd.TabIndex = 9
     Me.btnAdd.Text = "Add"
     Me.btnAdd.UseVisualStyleBackColor = True
-    Me.btnAdd.Visible = False
     '
     'btnRemove
     '
-    Me.btnRemove.Location = New System.Drawing.Point(96, 279)
+    Me.btnRemove.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+    Me.btnRemove.Location = New System.Drawing.Point(93, 288)
     Me.btnRemove.Name = "btnRemove"
     Me.btnRemove.Size = New System.Drawing.Size(75, 23)
     Me.btnRemove.TabIndex = 10
     Me.btnRemove.Text = "Remove"
     Me.btnRemove.UseVisualStyleBackColor = True
-    Me.btnRemove.Visible = False
     '
     'btnMoveUp
     '
-    Me.btnMoveUp.Location = New System.Drawing.Point(176, 279)
+    Me.btnMoveUp.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+    Me.btnMoveUp.Location = New System.Drawing.Point(176, 288)
     Me.btnMoveUp.Name = "btnMoveUp"
     Me.btnMoveUp.Size = New System.Drawing.Size(75, 23)
     Me.btnMoveUp.TabIndex = 11
     Me.btnMoveUp.Text = "Move Up"
     Me.btnMoveUp.UseVisualStyleBackColor = True
-    Me.btnMoveUp.Visible = False
     '
     'btnMoveDown
     '
-    Me.btnMoveDown.Location = New System.Drawing.Point(257, 279)
+    Me.btnMoveDown.Anchor = CType((System.Windows.Forms.AnchorStyles.Bottom Or System.Windows.Forms.AnchorStyles.Left), System.Windows.Forms.AnchorStyles)
+    Me.btnMoveDown.Location = New System.Drawing.Point(257, 288)
     Me.btnMoveDown.Name = "btnMoveDown"
     Me.btnMoveDown.Size = New System.Drawing.Size(75, 23)
     Me.btnMoveDown.TabIndex = 12
     Me.btnMoveDown.Text = "Move Down"
     Me.btnMoveDown.UseVisualStyleBackColor = True
-    Me.btnMoveDown.Visible = False
     '
     'btnGetFilename
     '
-    Me.btnGetFilename.Location = New System.Drawing.Point(257, 111)
+    Me.btnGetFilename.Location = New System.Drawing.Point(257, 132)
     Me.btnGetFilename.Name = "btnGetFilename"
     Me.btnGetFilename.Size = New System.Drawing.Size(90, 23)
     Me.btnGetFilename.TabIndex = 13
@@ -216,14 +206,16 @@ Partial Class frmMain
     '
     'dgvFiles
     '
+    Me.dgvFiles.Anchor = CType((((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Bottom) _
+            Or System.Windows.Forms.AnchorStyles.Left) _
+            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
     Me.dgvFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvFiles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcCheckbox, Me.dgcFileName, Me.dgcStartPercent, Me.dgcEndPercent})
-    Me.dgvFiles.Location = New System.Drawing.Point(338, 267)
+    Me.dgvFiles.Location = New System.Drawing.Point(15, 161)
     Me.dgvFiles.Name = "dgvFiles"
     Me.dgvFiles.RowHeadersVisible = False
-    Me.dgvFiles.Size = New System.Drawing.Size(43, 49)
+    Me.dgvFiles.Size = New System.Drawing.Size(332, 121)
     Me.dgvFiles.TabIndex = 19
-    Me.dgvFiles.Visible = False
     '
     'dgcCheckbox
     '
@@ -236,7 +228,7 @@ Partial Class frmMain
     Me.dgcFileName.HeaderText = "File Name"
     Me.dgcFileName.Name = "dgcFileName"
     Me.dgcFileName.ReadOnly = True
-    Me.dgcFileName.Width = 180
+    Me.dgcFileName.Width = 190
     '
     'dgcStartPercent
     '
@@ -251,47 +243,10 @@ Partial Class frmMain
     Me.dgcEndPercent.Name = "dgcEndPercent"
     Me.dgcEndPercent.Width = 50
     '
-    'lblFileName
-    '
-    Me.lblFileName.AutoSize = True
-    Me.lblFileName.Location = New System.Drawing.Point(15, 85)
-    Me.lblFileName.Name = "lblFileName"
-    Me.lblFileName.Size = New System.Drawing.Size(54, 13)
-    Me.lblFileName.TabIndex = 21
-    Me.lblFileName.Text = "File Name"
-    '
-    'btnBrowse
-    '
-    Me.btnBrowse.Anchor = CType((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    Me.btnBrowse.Location = New System.Drawing.Point(338, 81)
-    Me.btnBrowse.Name = "btnBrowse"
-    Me.btnBrowse.Size = New System.Drawing.Size(25, 20)
-    Me.btnBrowse.TabIndex = 22
-    Me.btnBrowse.Text = "..."
-    Me.btnBrowse.UseVisualStyleBackColor = True
-    '
-    'lblStartPercent
-    '
-    Me.lblStartPercent.AutoSize = True
-    Me.lblStartPercent.Location = New System.Drawing.Point(130, 144)
-    Me.lblStartPercent.Name = "lblStartPercent"
-    Me.lblStartPercent.Size = New System.Drawing.Size(40, 13)
-    Me.lblStartPercent.TabIndex = 25
-    Me.lblStartPercent.Text = "Start %"
-    '
-    'lblEndPercent
-    '
-    Me.lblEndPercent.AutoSize = True
-    Me.lblEndPercent.Location = New System.Drawing.Point(253, 144)
-    Me.lblEndPercent.Name = "lblEndPercent"
-    Me.lblEndPercent.Size = New System.Drawing.Size(37, 13)
-    Me.lblEndPercent.TabIndex = 26
-    Me.lblEndPercent.Text = "End %"
-    '
     'lblSkipPercent
     '
     Me.lblSkipPercent.AutoSize = True
-    Me.lblSkipPercent.Location = New System.Drawing.Point(188, 200)
+    Me.lblSkipPercent.Location = New System.Drawing.Point(188, 79)
     Me.lblSkipPercent.Name = "lblSkipPercent"
     Me.lblSkipPercent.Size = New System.Drawing.Size(39, 13)
     Me.lblSkipPercent.TabIndex = 30
@@ -300,7 +255,7 @@ Partial Class frmMain
     'lblFFPercent
     '
     Me.lblFFPercent.AutoSize = True
-    Me.lblFFPercent.Location = New System.Drawing.Point(15, 198)
+    Me.lblFFPercent.Location = New System.Drawing.Point(15, 77)
     Me.lblFFPercent.Name = "lblFFPercent"
     Me.lblFFPercent.Size = New System.Drawing.Size(57, 13)
     Me.lblFFPercent.TabIndex = 29
@@ -308,7 +263,7 @@ Partial Class frmMain
     '
     'btnSkipFwd
     '
-    Me.btnSkipFwd.Location = New System.Drawing.Point(257, 224)
+    Me.btnSkipFwd.Location = New System.Drawing.Point(257, 103)
     Me.btnSkipFwd.Name = "btnSkipFwd"
     Me.btnSkipFwd.Size = New System.Drawing.Size(75, 23)
     Me.btnSkipFwd.TabIndex = 34
@@ -317,7 +272,7 @@ Partial Class frmMain
     '
     'btnFastFwd
     '
-    Me.btnFastFwd.Location = New System.Drawing.Point(176, 224)
+    Me.btnFastFwd.Location = New System.Drawing.Point(176, 103)
     Me.btnFastFwd.Name = "btnFastFwd"
     Me.btnFastFwd.Size = New System.Drawing.Size(75, 23)
     Me.btnFastFwd.TabIndex = 33
@@ -326,7 +281,7 @@ Partial Class frmMain
     '
     'btnRewind
     '
-    Me.btnRewind.Location = New System.Drawing.Point(96, 224)
+    Me.btnRewind.Location = New System.Drawing.Point(96, 103)
     Me.btnRewind.Name = "btnRewind"
     Me.btnRewind.Size = New System.Drawing.Size(75, 23)
     Me.btnRewind.TabIndex = 32
@@ -335,7 +290,7 @@ Partial Class frmMain
     '
     'btnSkipBack
     '
-    Me.btnSkipBack.Location = New System.Drawing.Point(15, 224)
+    Me.btnSkipBack.Location = New System.Drawing.Point(15, 103)
     Me.btnSkipBack.Name = "btnSkipBack"
     Me.btnSkipBack.Size = New System.Drawing.Size(75, 23)
     Me.btnSkipBack.TabIndex = 31
@@ -374,7 +329,7 @@ Partial Class frmMain
     '
     Me.nudSkipPercent.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Board_973.My.MySettings.Default, "dSkipPercent", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.nudSkipPercent.DecimalPlaces = 2
-    Me.nudSkipPercent.Location = New System.Drawing.Point(257, 198)
+    Me.nudSkipPercent.Location = New System.Drawing.Point(257, 77)
     Me.nudSkipPercent.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
     Me.nudSkipPercent.Name = "nudSkipPercent"
     Me.nudSkipPercent.Size = New System.Drawing.Size(49, 20)
@@ -385,55 +340,13 @@ Partial Class frmMain
     '
     Me.nudFFPercent.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Board_973.My.MySettings.Default, "dFFPercent", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
     Me.nudFFPercent.DecimalPlaces = 2
-    Me.nudFFPercent.Location = New System.Drawing.Point(96, 198)
+    Me.nudFFPercent.Location = New System.Drawing.Point(96, 77)
     Me.nudFFPercent.Maximum = New Decimal(New Integer() {999, 0, 0, 131072})
     Me.nudFFPercent.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
     Me.nudFFPercent.Name = "nudFFPercent"
     Me.nudFFPercent.Size = New System.Drawing.Size(49, 20)
     Me.nudFFPercent.TabIndex = 27
     Me.nudFFPercent.Value = Global.Board_973.My.MySettings.Default.dFFPercent
-    '
-    'nudEndPercent
-    '
-    Me.nudEndPercent.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Board_973.My.MySettings.Default, "dEndPercent", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.nudEndPercent.Location = New System.Drawing.Point(296, 142)
-    Me.nudEndPercent.Name = "nudEndPercent"
-    Me.nudEndPercent.Size = New System.Drawing.Size(51, 20)
-    Me.nudEndPercent.TabIndex = 24
-    Me.nudEndPercent.Value = Global.Board_973.My.MySettings.Default.dEndPercent
-    '
-    'nudStartPercent
-    '
-    Me.nudStartPercent.DataBindings.Add(New System.Windows.Forms.Binding("Value", Global.Board_973.My.MySettings.Default, "dStartPercent", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.nudStartPercent.Location = New System.Drawing.Point(176, 142)
-    Me.nudStartPercent.Maximum = New Decimal(New Integer() {99, 0, 0, 0})
-    Me.nudStartPercent.Name = "nudStartPercent"
-    Me.nudStartPercent.Size = New System.Drawing.Size(51, 20)
-    Me.nudStartPercent.TabIndex = 23
-    Me.nudStartPercent.Value = Global.Board_973.My.MySettings.Default.dStartPercent
-    '
-    'txtFileName
-    '
-    Me.txtFileName.Anchor = CType(((System.Windows.Forms.AnchorStyles.Top Or System.Windows.Forms.AnchorStyles.Left) _
-            Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
-    Me.txtFileName.DataBindings.Add(New System.Windows.Forms.Binding("Text", Global.Board_973.My.MySettings.Default, "sFileName", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.txtFileName.Location = New System.Drawing.Point(96, 82)
-    Me.txtFileName.Name = "txtFileName"
-    Me.txtFileName.Size = New System.Drawing.Size(236, 20)
-    Me.txtFileName.TabIndex = 20
-    Me.txtFileName.Text = Global.Board_973.My.MySettings.Default.sFileName
-    '
-    'chkContinuousPlayback
-    '
-    Me.chkContinuousPlayback.AutoSize = True
-    Me.chkContinuousPlayback.Checked = Global.Board_973.My.MySettings.Default.bContinuous
-    Me.chkContinuousPlayback.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Board_973.My.MySettings.Default, "bContinuous", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
-    Me.chkContinuousPlayback.Location = New System.Drawing.Point(18, 143)
-    Me.chkContinuousPlayback.Name = "chkContinuousPlayback"
-    Me.chkContinuousPlayback.Size = New System.Drawing.Size(102, 17)
-    Me.chkContinuousPlayback.TabIndex = 18
-    Me.chkContinuousPlayback.Text = "Continuous Play"
-    Me.chkContinuousPlayback.UseVisualStyleBackColor = True
     '
     'nudSubChannel
     '
@@ -482,15 +395,7 @@ Partial Class frmMain
     Me.Controls.Add(Me.lblFFPercent)
     Me.Controls.Add(Me.nudSkipPercent)
     Me.Controls.Add(Me.nudFFPercent)
-    Me.Controls.Add(Me.lblEndPercent)
-    Me.Controls.Add(Me.lblStartPercent)
-    Me.Controls.Add(Me.nudEndPercent)
-    Me.Controls.Add(Me.nudStartPercent)
-    Me.Controls.Add(Me.btnBrowse)
-    Me.Controls.Add(Me.lblFileName)
-    Me.Controls.Add(Me.txtFileName)
     Me.Controls.Add(Me.dgvFiles)
-    Me.Controls.Add(Me.chkContinuousPlayback)
     Me.Controls.Add(Me.btnAssignChannel)
     Me.Controls.Add(Me.lblChannel)
     Me.Controls.Add(Me.nudSubChannel)
@@ -513,8 +418,6 @@ Partial Class frmMain
     CType(Me.dgvFiles, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nudSkipPercent, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nudFFPercent, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.nudEndPercent, System.ComponentModel.ISupportInitialize).EndInit()
-    CType(Me.nudStartPercent, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nudSubChannel, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nudChannel, System.ComponentModel.ISupportInitialize).EndInit()
     CType(Me.nudCard, System.ComponentModel.ISupportInitialize).EndInit()
@@ -540,19 +443,11 @@ Partial Class frmMain
   Friend WithEvents nudSubChannel As System.Windows.Forms.NumericUpDown
   Friend WithEvents lblChannel As System.Windows.Forms.Label
   Friend WithEvents btnAssignChannel As System.Windows.Forms.Button
-  Friend WithEvents chkContinuousPlayback As System.Windows.Forms.CheckBox
   Friend WithEvents dgvFiles As System.Windows.Forms.DataGridView
   Friend WithEvents dgcCheckbox As System.Windows.Forms.DataGridViewCheckBoxColumn
   Friend WithEvents dgcFileName As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents dgcStartPercent As System.Windows.Forms.DataGridViewTextBoxColumn
   Friend WithEvents dgcEndPercent As System.Windows.Forms.DataGridViewTextBoxColumn
-  Friend WithEvents txtFileName As System.Windows.Forms.TextBox
-  Friend WithEvents lblFileName As System.Windows.Forms.Label
-  Friend WithEvents btnBrowse As System.Windows.Forms.Button
-  Friend WithEvents nudEndPercent As System.Windows.Forms.NumericUpDown
-  Friend WithEvents nudStartPercent As System.Windows.Forms.NumericUpDown
-  Friend WithEvents lblStartPercent As System.Windows.Forms.Label
-  Friend WithEvents lblEndPercent As System.Windows.Forms.Label
   Friend WithEvents lblSkipPercent As System.Windows.Forms.Label
   Friend WithEvents lblFFPercent As System.Windows.Forms.Label
   Friend WithEvents nudSkipPercent As System.Windows.Forms.NumericUpDown

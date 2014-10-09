@@ -1,5 +1,6 @@
 ﻿'Imports api
 Imports SRIM = System.Runtime.InteropServices.Marshal
+Imports System.Xml.Serialization
 
 Public Class frmMain
   Private piCard As Integer = -1
@@ -71,42 +72,31 @@ Public Class frmMain
     End If
   End Sub
 
-  Private Sub btnBrowse_Click(sender As Object, e As EventArgs) Handles btnBrowse.Click
+  Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
     Dim eResult As DialogResult
+    Dim sFilename As String
+    Dim drFile As DataGridViewRow
+    Dim tbcItem As DataGridViewTextBoxCell
 
     eResult = dlgOpenFiles.ShowDialog()
 
     If (eResult = Windows.Forms.DialogResult.OK) Then
-      Me.txtFileName.Text = dlgOpenFiles.FileName
+      'Add the files to the ListView
+      For Each sFilename In dlgOpenFiles.FileNames
+        drFile = New DataGridViewRow
+        drFile.Cells.Add(New DataGridViewCheckBoxCell)
+        tbcItem = New DataGridViewTextBoxCell
+        tbcItem.Value = sFilename
+        drFile.Cells.Add(tbcItem)
+        tbcItem = New DataGridViewTextBoxCell
+        tbcItem.Value = 0
+        drFile.Cells.Add(tbcItem)
+        tbcItem = New DataGridViewTextBoxCell
+        tbcItem.Value = 100
+        drFile.Cells.Add(tbcItem)
+        dgvFiles.Rows.Add(drFile)
+      Next
     End If
-  End Sub
-
-  Private Sub btnAdd_Click(sender As Object, e As EventArgs) Handles btnAdd.Click
-    'Dim eResult As DialogResult
-    'Dim sFilename As String
-    'Dim drFile As DataGridViewRow
-    'Dim tbcItem As DataGridViewTextBoxCell
-
-    'eResult = dlgOpenFiles.ShowDialog()
-
-    'If (eResult = Windows.Forms.DialogResult.OK) Then
-    '  'Add the files to the ListView
-    '  For Each sFilename In dlgOpenFiles.FileNames
-    '    drFile = New DataGridViewRow
-    '    drFile.Cells.Add(New DataGridViewCheckBoxCell)
-    '    tbcItem = New DataGridViewTextBoxCell
-    '    tbcItem.Value = sFilename
-    '    drFile.Cells.Add(tbcItem)
-    '    tbcItem = New DataGridViewTextBoxCell
-    '    tbcItem.Value = 0
-    '    drFile.Cells.Add(tbcItem)
-    '    tbcItem = New DataGridViewTextBoxCell
-    '    tbcItem.Value = 100
-    '    drFile.Cells.Add(tbcItem)
-    '    dgvFiles.Rows.Add(drFile)
-    '  Next
-    'End If
-
   End Sub
 
   Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
@@ -133,28 +123,9 @@ Public Class frmMain
   End Sub
 
   Private Sub btnPlay_Click(sender As Object, e As EventArgs) Handles btnPlay.Click
-    'If (dgvFiles.SelectedRows.Count > 0) Then
-    '  If (piCard >= 0) Then
-    '  piptrFilename = SRIM.StringToHGlobalAnsi(dgvFiles.SelectedRows(0).Cells(dgcFileName.Name).Value)
-    '  If (chkContinuousPlayback.Checked) Then
-    '    eResult = ExecutePlaySeamless973(piCard, piptrFilename, 0)
-    '  Else
-    '    eResult = ExecutePlay973(piCard, piptrFilename, dgvFiles.SelectedRows(0).Cells(dgcStartPercent.Name).Value, dgvFiles.SelectedRows(0).Cells(dgcEndPercent.Name).Value, 0)
-    '  End If
-
-    '  If (eResult = API.STATUS.STATUS_FAILURE) Then
-    '    txtStatus.Text = "STATUS_FAILURE"
-    '  ElseIf (eResult = API.STATUS.STATUS_SUCCESS) Then
-    '    txtStatus.Text = "STATUS_SUCCESS"
-    '  Else
-    '    txtStatus.Text = String.Format("Status = {0}", eResult)
-    '  End If
-    'Else
-    '  MessageBox.Show("You must initialize a card.", "Initialize Card", MessageBoxButtons.OK)
-    'End If
-    If (txtFileName.Text.Length > 0) Then
+    If (dgvFiles.SelectedRows.Count > 0) Then
       If (piCard >= 0) Then
-        StartPlayback(txtFileName.Text)
+        StartPlayback(dgvFiles.SelectedRows(0).Cells(dgcFileName.Name).Value)
       Else
         MessageBox.Show("You must initialize a card.", "Initialize Card", MessageBoxButtons.OK)
       End If
@@ -254,7 +225,25 @@ Public Class frmMain
     End If
   End Sub
 
+  Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+    Dim dsGrid As New DataSet
+
+    'Load the data grid
+    If System.IO.File.Exists(My.Settings.XMLFileListPath) Then
+      'dsGrid.ReadXml(My.Settings.XMLFileListPath)
+      'Try
+      '  With dgvFiles
+      '    .DataSource = dsGrid
+      '    .DataMember = "FileList"
+      '  End With
+      'Catch ex As Exception
+
+      'End Try
+    End If
+  End Sub
+
   Private Sub frmMain_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+    'Save data from the grid
     'Try
     '  Dim dsGrid As New DataSet
 
@@ -273,35 +262,11 @@ Public Class frmMain
     End Try
   End Sub
 
-  Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
-    Dim dsGrid As New DataSet
-
-    'Load the data grid
-    If System.IO.File.Exists(My.Settings.XMLFileListPath) Then
-      'dsGrid.ReadXml(My.Settings.XMLFileListPath)
-      'Try
-      '  With dgvFiles
-      '    .DataSource = dsGrid
-      '    .DataMember = "FileList"
-      '  End With
-      'Catch ex As Exception
-
-      'End Try
-    End If
+  Public Sub OnProgress973(ByVal iDevice As Integer, ByVal iPercent As Integer)
+    pdCurrentPercent = iPercent
+    'Me.progPlayback.Value = iPercent
   End Sub
 
-  Private Sub chkContinuousPlayback_CheckedChanged(sender As Object, e As EventArgs) Handles chkContinuousPlayback.CheckedChanged
-    If (chkContinuousPlayback.Checked) Then
-      Me.nudStartPercent.Enabled = False
-      Me.nudEndPercent.Enabled = False
-    Else
-      Me.nudStartPercent.Enabled = True
-      Me.nudEndPercent.Enabled = True
-    End If
-  End Sub
-
-  Public Sub OnProgress973(ByVal iDevice As Integer, ByVal iPercent As Integer)    pdCurrentPercent = iPercent    'Me.progPlayback.Value = iPercent
-  End Sub
   Public Sub OnStatus973(ByVal iDevice As Integer, ByVal eStatus As API.STATUS)
     peCurrentStatus = eStatus
     If eStatus = API.STATUS.STATUS_PLAY_COMPLETE Then
