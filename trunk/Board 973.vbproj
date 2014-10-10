@@ -114,6 +114,9 @@
     </None>
     <None Include="My Project\DataSources\Board_973.My.MyApplication.datasource" />
     <None Include="My Project\DataSources\Board_973.My.MySettings.datasource" />
+    <None Include="My Project\DataSources\FileInfo.datasource" />
+    <None Include="My Project\DataSources\frmMain.datasource" />
+    <None Include="My Project\DataSources\Playlist.datasource" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>

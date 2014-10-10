@@ -51,13 +51,13 @@ Partial Class frmMain
     Me.btnSkipBack = New System.Windows.Forms.Button()
     Me.progPlayback = New System.Windows.Forms.ProgressBar()
     Me.tmrProcessCallbackResults = New System.Windows.Forms.Timer(Me.components)
+    Me.chkRepeat = New System.Windows.Forms.CheckBox()
     Me.chkAbsolutePosition = New System.Windows.Forms.CheckBox()
     Me.nudSkipPercent = New System.Windows.Forms.NumericUpDown()
     Me.nudFFPercent = New System.Windows.Forms.NumericUpDown()
     Me.nudSubChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudCard = New System.Windows.Forms.NumericUpDown()
-    Me.chkRepeat = New System.Windows.Forms.CheckBox()
     CType(Me.dgvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudSkipPercent, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudFFPercent, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -315,6 +315,18 @@ Partial Class frmMain
     '
     Me.tmrProcessCallbackResults.Enabled = True
     '
+    'chkRepeat
+    '
+    Me.chkRepeat.AutoSize = True
+    Me.chkRepeat.Checked = Global.Board_973.My.MySettings.Default.bRepeat
+    Me.chkRepeat.DataBindings.Add(New System.Windows.Forms.Binding("Checked", Global.Board_973.My.MySettings.Default, "bRepeat", True, System.Windows.Forms.DataSourceUpdateMode.OnPropertyChanged))
+    Me.chkRepeat.Location = New System.Drawing.Point(251, 400)
+    Me.chkRepeat.Name = "chkRepeat"
+    Me.chkRepeat.Size = New System.Drawing.Size(96, 17)
+    Me.chkRepeat.TabIndex = 28
+    Me.chkRepeat.Text = "Repeat Playlist"
+    Me.chkRepeat.UseVisualStyleBackColor = True
+    '
     'chkAbsolutePosition
     '
     Me.chkAbsolutePosition.AutoSize = True
@@ -382,16 +394,6 @@ Partial Class frmMain
     Me.nudCard.Size = New System.Drawing.Size(51, 20)
     Me.nudCard.TabIndex = 1
     Me.nudCard.Value = Global.Board_973.My.MySettings.Default.dCard
-    '
-    'chkRepeat
-    '
-    Me.chkRepeat.AutoSize = True
-    Me.chkRepeat.Location = New System.Drawing.Point(251, 400)
-    Me.chkRepeat.Name = "chkRepeat"
-    Me.chkRepeat.Size = New System.Drawing.Size(96, 17)
-    Me.chkRepeat.TabIndex = 28
-    Me.chkRepeat.Text = "Repeat Playlist"
-    Me.chkRepeat.UseVisualStyleBackColor = True
     '
     'frmMain
     '
