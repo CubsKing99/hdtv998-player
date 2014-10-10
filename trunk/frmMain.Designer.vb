@@ -57,6 +57,7 @@ Partial Class frmMain
     Me.nudSubChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudChannel = New System.Windows.Forms.NumericUpDown()
     Me.nudCard = New System.Windows.Forms.NumericUpDown()
+    Me.chkRepeat = New System.Windows.Forms.CheckBox()
     CType(Me.dgvFiles, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudSkipPercent, System.ComponentModel.ISupportInitialize).BeginInit()
     CType(Me.nudFFPercent, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -71,7 +72,7 @@ Partial Class frmMain
     Me.lblCard.Location = New System.Drawing.Point(12, 14)
     Me.lblCard.Name = "lblCard"
     Me.lblCard.Size = New System.Drawing.Size(29, 13)
-    Me.lblCard.TabIndex = 1
+    Me.lblCard.TabIndex = 0
     Me.lblCard.Text = "Card"
     '
     'btnInitialize
@@ -90,7 +91,7 @@ Partial Class frmMain
     Me.lblStatus.Location = New System.Drawing.Point(15, 317)
     Me.lblStatus.Name = "lblStatus"
     Me.lblStatus.Size = New System.Drawing.Size(37, 13)
-    Me.lblStatus.TabIndex = 3
+    Me.lblStatus.TabIndex = 24
     Me.lblStatus.Text = "Status"
     '
     'txtStatus
@@ -102,7 +103,7 @@ Partial Class frmMain
     Me.txtStatus.Name = "txtStatus"
     Me.txtStatus.ReadOnly = True
     Me.txtStatus.Size = New System.Drawing.Size(272, 77)
-    Me.txtStatus.TabIndex = 4
+    Me.txtStatus.TabIndex = 25
     '
     'dlgOpenFiles
     '
@@ -115,7 +116,7 @@ Partial Class frmMain
     Me.btnPlay.Location = New System.Drawing.Point(15, 132)
     Me.btnPlay.Name = "btnPlay"
     Me.btnPlay.Size = New System.Drawing.Size(75, 23)
-    Me.btnPlay.TabIndex = 6
+    Me.btnPlay.TabIndex = 15
     Me.btnPlay.Text = "Play"
     Me.btnPlay.UseVisualStyleBackColor = True
     '
@@ -124,7 +125,7 @@ Partial Class frmMain
     Me.btnPause.Location = New System.Drawing.Point(96, 132)
     Me.btnPause.Name = "btnPause"
     Me.btnPause.Size = New System.Drawing.Size(75, 23)
-    Me.btnPause.TabIndex = 7
+    Me.btnPause.TabIndex = 16
     Me.btnPause.Text = "Pause"
     Me.btnPause.UseVisualStyleBackColor = True
     '
@@ -133,7 +134,7 @@ Partial Class frmMain
     Me.btnStop.Location = New System.Drawing.Point(176, 132)
     Me.btnStop.Name = "btnStop"
     Me.btnStop.Size = New System.Drawing.Size(75, 23)
-    Me.btnStop.TabIndex = 8
+    Me.btnStop.TabIndex = 17
     Me.btnStop.Text = "Stop"
     Me.btnStop.UseVisualStyleBackColor = True
     '
@@ -143,7 +144,7 @@ Partial Class frmMain
     Me.btnAdd.Location = New System.Drawing.Point(12, 288)
     Me.btnAdd.Name = "btnAdd"
     Me.btnAdd.Size = New System.Drawing.Size(75, 23)
-    Me.btnAdd.TabIndex = 9
+    Me.btnAdd.TabIndex = 20
     Me.btnAdd.Text = "Add"
     Me.btnAdd.UseVisualStyleBackColor = True
     '
@@ -153,7 +154,7 @@ Partial Class frmMain
     Me.btnRemove.Location = New System.Drawing.Point(93, 288)
     Me.btnRemove.Name = "btnRemove"
     Me.btnRemove.Size = New System.Drawing.Size(75, 23)
-    Me.btnRemove.TabIndex = 10
+    Me.btnRemove.TabIndex = 21
     Me.btnRemove.Text = "Remove"
     Me.btnRemove.UseVisualStyleBackColor = True
     '
@@ -163,7 +164,7 @@ Partial Class frmMain
     Me.btnMoveUp.Location = New System.Drawing.Point(176, 288)
     Me.btnMoveUp.Name = "btnMoveUp"
     Me.btnMoveUp.Size = New System.Drawing.Size(75, 23)
-    Me.btnMoveUp.TabIndex = 11
+    Me.btnMoveUp.TabIndex = 22
     Me.btnMoveUp.Text = "Move Up"
     Me.btnMoveUp.UseVisualStyleBackColor = True
     '
@@ -173,7 +174,7 @@ Partial Class frmMain
     Me.btnMoveDown.Location = New System.Drawing.Point(257, 288)
     Me.btnMoveDown.Name = "btnMoveDown"
     Me.btnMoveDown.Size = New System.Drawing.Size(75, 23)
-    Me.btnMoveDown.TabIndex = 12
+    Me.btnMoveDown.TabIndex = 23
     Me.btnMoveDown.Text = "Move Down"
     Me.btnMoveDown.UseVisualStyleBackColor = True
     '
@@ -182,7 +183,7 @@ Partial Class frmMain
     Me.btnGetFilename.Location = New System.Drawing.Point(257, 132)
     Me.btnGetFilename.Name = "btnGetFilename"
     Me.btnGetFilename.Size = New System.Drawing.Size(90, 23)
-    Me.btnGetFilename.TabIndex = 13
+    Me.btnGetFilename.TabIndex = 18
     Me.btnGetFilename.Text = "Get Filename"
     Me.btnGetFilename.UseVisualStyleBackColor = True
     '
@@ -192,7 +193,7 @@ Partial Class frmMain
     Me.lblChannel.Location = New System.Drawing.Point(12, 49)
     Me.lblChannel.Name = "lblChannel"
     Me.lblChannel.Size = New System.Drawing.Size(46, 13)
-    Me.lblChannel.TabIndex = 16
+    Me.lblChannel.TabIndex = 3
     Me.lblChannel.Text = "Channel"
     '
     'btnAssignChannel
@@ -200,7 +201,7 @@ Partial Class frmMain
     Me.btnAssignChannel.Location = New System.Drawing.Point(210, 44)
     Me.btnAssignChannel.Name = "btnAssignChannel"
     Me.btnAssignChannel.Size = New System.Drawing.Size(75, 23)
-    Me.btnAssignChannel.TabIndex = 17
+    Me.btnAssignChannel.TabIndex = 6
     Me.btnAssignChannel.Text = "Assign"
     Me.btnAssignChannel.UseVisualStyleBackColor = True
     '
@@ -212,8 +213,10 @@ Partial Class frmMain
     Me.dgvFiles.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
     Me.dgvFiles.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.dgcCheckbox, Me.dgcFileName, Me.dgcStartPercent, Me.dgcEndPercent})
     Me.dgvFiles.Location = New System.Drawing.Point(15, 161)
+    Me.dgvFiles.MultiSelect = False
     Me.dgvFiles.Name = "dgvFiles"
     Me.dgvFiles.RowHeadersVisible = False
+    Me.dgvFiles.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.CellSelect
     Me.dgvFiles.Size = New System.Drawing.Size(332, 121)
     Me.dgvFiles.TabIndex = 19
     '
@@ -249,7 +252,7 @@ Partial Class frmMain
     Me.lblSkipPercent.Location = New System.Drawing.Point(188, 79)
     Me.lblSkipPercent.Name = "lblSkipPercent"
     Me.lblSkipPercent.Size = New System.Drawing.Size(39, 13)
-    Me.lblSkipPercent.TabIndex = 30
+    Me.lblSkipPercent.TabIndex = 9
     Me.lblSkipPercent.Text = "Skip %"
     '
     'lblFFPercent
@@ -258,7 +261,7 @@ Partial Class frmMain
     Me.lblFFPercent.Location = New System.Drawing.Point(15, 77)
     Me.lblFFPercent.Name = "lblFFPercent"
     Me.lblFFPercent.Size = New System.Drawing.Size(57, 13)
-    Me.lblFFPercent.TabIndex = 29
+    Me.lblFFPercent.TabIndex = 7
     Me.lblFFPercent.Text = "FF/Rew %"
     '
     'btnSkipFwd
@@ -266,7 +269,7 @@ Partial Class frmMain
     Me.btnSkipFwd.Location = New System.Drawing.Point(257, 103)
     Me.btnSkipFwd.Name = "btnSkipFwd"
     Me.btnSkipFwd.Size = New System.Drawing.Size(75, 23)
-    Me.btnSkipFwd.TabIndex = 34
+    Me.btnSkipFwd.TabIndex = 14
     Me.btnSkipFwd.Text = "Skip Fwd"
     Me.btnSkipFwd.UseVisualStyleBackColor = True
     '
@@ -275,7 +278,7 @@ Partial Class frmMain
     Me.btnFastFwd.Location = New System.Drawing.Point(176, 103)
     Me.btnFastFwd.Name = "btnFastFwd"
     Me.btnFastFwd.Size = New System.Drawing.Size(75, 23)
-    Me.btnFastFwd.TabIndex = 33
+    Me.btnFastFwd.TabIndex = 13
     Me.btnFastFwd.Text = "Fast Fwd"
     Me.btnFastFwd.UseVisualStyleBackColor = True
     '
@@ -284,7 +287,7 @@ Partial Class frmMain
     Me.btnRewind.Location = New System.Drawing.Point(96, 103)
     Me.btnRewind.Name = "btnRewind"
     Me.btnRewind.Size = New System.Drawing.Size(75, 23)
-    Me.btnRewind.TabIndex = 32
+    Me.btnRewind.TabIndex = 12
     Me.btnRewind.Text = "Rewind"
     Me.btnRewind.UseVisualStyleBackColor = True
     '
@@ -293,7 +296,7 @@ Partial Class frmMain
     Me.btnSkipBack.Location = New System.Drawing.Point(15, 103)
     Me.btnSkipBack.Name = "btnSkipBack"
     Me.btnSkipBack.Size = New System.Drawing.Size(75, 23)
-    Me.btnSkipBack.TabIndex = 31
+    Me.btnSkipBack.TabIndex = 11
     Me.btnSkipBack.Text = "Skip Back"
     Me.btnSkipBack.UseVisualStyleBackColor = True
     '
@@ -305,7 +308,7 @@ Partial Class frmMain
     Me.progPlayback.Name = "progPlayback"
     Me.progPlayback.Size = New System.Drawing.Size(366, 23)
     Me.progPlayback.Step = 1
-    Me.progPlayback.TabIndex = 35
+    Me.progPlayback.TabIndex = 27
     Me.progPlayback.Visible = False
     '
     'tmrProcessCallbackResults
@@ -320,7 +323,7 @@ Partial Class frmMain
     Me.chkAbsolutePosition.Location = New System.Drawing.Point(18, 400)
     Me.chkAbsolutePosition.Name = "chkAbsolutePosition"
     Me.chkAbsolutePosition.Size = New System.Drawing.Size(204, 17)
-    Me.chkAbsolutePosition.TabIndex = 36
+    Me.chkAbsolutePosition.TabIndex = 26
     Me.chkAbsolutePosition.Text = "Show Absolute Current Position in File"
     Me.chkAbsolutePosition.UseVisualStyleBackColor = True
     Me.chkAbsolutePosition.Visible = False
@@ -333,7 +336,7 @@ Partial Class frmMain
     Me.nudSkipPercent.Maximum = New Decimal(New Integer() {50, 0, 0, 0})
     Me.nudSkipPercent.Name = "nudSkipPercent"
     Me.nudSkipPercent.Size = New System.Drawing.Size(49, 20)
-    Me.nudSkipPercent.TabIndex = 28
+    Me.nudSkipPercent.TabIndex = 10
     Me.nudSkipPercent.Value = Global.Board_973.My.MySettings.Default.dSkipPercent
     '
     'nudFFPercent
@@ -345,7 +348,7 @@ Partial Class frmMain
     Me.nudFFPercent.Minimum = New Decimal(New Integer() {1, 0, 0, 131072})
     Me.nudFFPercent.Name = "nudFFPercent"
     Me.nudFFPercent.Size = New System.Drawing.Size(49, 20)
-    Me.nudFFPercent.TabIndex = 27
+    Me.nudFFPercent.TabIndex = 8
     Me.nudFFPercent.Value = Global.Board_973.My.MySettings.Default.dFFPercent
     '
     'nudSubChannel
@@ -356,7 +359,7 @@ Partial Class frmMain
     Me.nudSubChannel.Minimum = New Decimal(New Integer() {1, 0, 0, 0})
     Me.nudSubChannel.Name = "nudSubChannel"
     Me.nudSubChannel.Size = New System.Drawing.Size(51, 20)
-    Me.nudSubChannel.TabIndex = 15
+    Me.nudSubChannel.TabIndex = 5
     Me.nudSubChannel.Value = Global.Board_973.My.MySettings.Default.dSubChannel
     '
     'nudChannel
@@ -367,7 +370,7 @@ Partial Class frmMain
     Me.nudChannel.Minimum = New Decimal(New Integer() {14, 0, 0, 0})
     Me.nudChannel.Name = "nudChannel"
     Me.nudChannel.Size = New System.Drawing.Size(51, 20)
-    Me.nudChannel.TabIndex = 14
+    Me.nudChannel.TabIndex = 4
     Me.nudChannel.Value = Global.Board_973.My.MySettings.Default.dChannel
     '
     'nudCard
@@ -377,14 +380,25 @@ Partial Class frmMain
     Me.nudCard.Maximum = New Decimal(New Integer() {7, 0, 0, 0})
     Me.nudCard.Name = "nudCard"
     Me.nudCard.Size = New System.Drawing.Size(51, 20)
-    Me.nudCard.TabIndex = 0
+    Me.nudCard.TabIndex = 1
     Me.nudCard.Value = Global.Board_973.My.MySettings.Default.dCard
+    '
+    'chkRepeat
+    '
+    Me.chkRepeat.AutoSize = True
+    Me.chkRepeat.Location = New System.Drawing.Point(251, 400)
+    Me.chkRepeat.Name = "chkRepeat"
+    Me.chkRepeat.Size = New System.Drawing.Size(96, 17)
+    Me.chkRepeat.TabIndex = 28
+    Me.chkRepeat.Text = "Repeat Playlist"
+    Me.chkRepeat.UseVisualStyleBackColor = True
     '
     'frmMain
     '
     Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
     Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
     Me.ClientSize = New System.Drawing.Size(397, 449)
+    Me.Controls.Add(Me.chkRepeat)
     Me.Controls.Add(Me.chkAbsolutePosition)
     Me.Controls.Add(Me.progPlayback)
     Me.Controls.Add(Me.btnSkipFwd)
@@ -459,5 +473,6 @@ Partial Class frmMain
   Friend WithEvents progPlayback As System.Windows.Forms.ProgressBar
   Friend WithEvents tmrProcessCallbackResults As System.Windows.Forms.Timer
   Friend WithEvents chkAbsolutePosition As System.Windows.Forms.CheckBox
+  Friend WithEvents chkRepeat As System.Windows.Forms.CheckBox
 
 End Class
