@@ -114,17 +114,17 @@ Namespace My
             End Set
         End Property
         
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
-        Public Property bContinuous() As Boolean
-            Get
-                Return CType(Me("bContinuous"),Boolean)
-            End Get
-            Set
-                Me("bContinuous") = value
-            End Set
-        End Property
+    <Global.System.Configuration.UserScopedSettingAttribute(), _
+     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
+     Global.System.Configuration.DefaultSettingValueAttribute("False")> _
+    Public Property bRepeat() As Boolean
+      Get
+        Return CType(Me("bRepeat"), Boolean)
+      End Get
+      Set(value As Boolean)
+        Me("bRepeat") = value
+      End Set
+    End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _

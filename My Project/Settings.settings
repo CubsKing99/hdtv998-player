@@ -17,7 +17,7 @@
     <Setting Name="dSubChannel" Type="System.Decimal" Scope="User">
       <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="bContinuous" Type="System.Boolean" Scope="User">
+    <Setting Name="bRepeat" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="dStartPercent" Type="System.Decimal" Scope="User">

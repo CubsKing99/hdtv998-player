@@ -1,5 +1,4 @@
-﻿'Imports api
-Imports SRIM = System.Runtime.InteropServices.Marshal
+﻿Imports SRIM = System.Runtime.InteropServices.Marshal
 Imports System.Xml.Serialization
 
 Public Class frmMain
@@ -333,6 +332,10 @@ Public Class frmMain
             StartPlayback(dgrItem.Index)
           End If
         Next
+      Else
+        If Not bFoundAnother Then 'End of playlist, don't repeat.
+          StopPlayback()
+        End If
       End If
     End If
 
@@ -458,32 +461,72 @@ Public Class frmMain
 #End Region
 
   Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
-    Dim dsGrid As New DataSet
-
     'Load the data grid
     If System.IO.File.Exists(My.Settings.XMLFileListPath) Then
-      'dsGrid.ReadXml(My.Settings.XMLFileListPath)
-      'Try
-      '  With dgvFiles
-      '    .DataSource = dsGrid
-      '    .DataMember = "FileList"
-      '  End With
-      'Catch ex As Exception
+      Try
+        Dim datPlaylist As New Playlist
+        Dim datFileInfo As FileInfo
+        Dim dgrFile As DataGridViewRow
+        Dim tbcItem As DataGridViewTextBoxCell
+        Dim xsPlaylist As New XmlSerializer(GetType(Playlist))
+        Dim srXML As New System.IO.StreamReader(My.Settings.XMLFileListPath)
 
-      'End Try
+        'Load the data from XML
+        datPlaylist = xsPlaylist.Deserialize(srXML)
+        srXML.Close()
+
+        'Now add every item to the grid.
+        For Each datFileInfo In datPlaylist
+          If datFileInfo.FileName.Trim.Length > 0 Then
+            dgrFile = New DataGridViewRow
+
+            With dgrFile
+              .Cells.Add(New DataGridViewCheckBoxCell)
+              .Cells(0).Value = datFileInfo.Selected
+              tbcItem = New DataGridViewTextBoxCell
+              tbcItem.Value = datFileInfo.FileName
+              .Cells.Add(tbcItem)
+              tbcItem = New DataGridViewTextBoxCell
+              tbcItem.Value = datFileInfo.StartPercent
+              .Cells.Add(tbcItem)
+              tbcItem = New DataGridViewTextBoxCell
+              tbcItem.Value = datFileInfo.EndPercent
+              .Cells.Add(tbcItem)
+            End With
+            dgvFiles.Rows.Add(dgrFile)
+          End If
+        Next
+      Catch ex As Exception
+        MessageBox.Show("Exception:" & Environment.NewLine & Environment.NewLine & ex.Message)
+      End Try
     End If
   End Sub
 
-  Private Sub frmMain_Disposed(sender As Object, e As EventArgs) Handles Me.Disposed
+  Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
     'Save data from the grid
-    'Try
-    '  Dim dsGrid As New DataSet
+    Try
+      Dim datPlaylist As New Playlist
+      Dim datFileInfo As FileInfo
+      Dim dgrFile As DataGridViewRow
+      Dim xsPlaylist As New XmlSerializer(GetType(Playlist))
+      Dim swXML As New System.IO.StreamWriter(My.Settings.XMLFileListPath)
 
-    '  'Save the data grid
-    '  dsGrid = dgvFiles.DataSource
-    '  dsGrid.WriteXml(My.Settings.XMLFileListPath)
-    'Catch ex As Exception
-    'End Try
+      'Save the data grid
+      For Each dgrFile In dgvFiles.Rows
+        datFileInfo = New FileInfo
+        With datFileInfo
+          .Selected = dgrFile.Cells(dgcCheckbox.Index).Value
+          .FileName = dgrFile.Cells(dgcFileName.Index).Value
+          .StartPercent = dgrFile.Cells(dgcStartPercent.Index).Value
+          .EndPercent = dgrFile.Cells(dgcEndPercent.Index).Value
+        End With
+        datPlaylist.Add(datFileInfo)
+      Next
+      xsPlaylist.Serialize(swXML, datPlaylist)
+      swXML.Close()
+    Catch ex As Exception
+      MessageBox.Show("Exception:" & Environment.NewLine & Environment.NewLine & ex.Message)
+    End Try
 
     Try
       If (p_iCard >= 0) Then
