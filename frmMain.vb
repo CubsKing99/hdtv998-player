@@ -117,6 +117,10 @@ Public Class frmMain
 #Region "Event Handlers"
 
   Private Sub btnPlay_Click(sender As Object, e As EventArgs) Handles btnPlay.Click
+    PlayFile()
+  End Sub
+
+  Private Sub PlayFile()
     Dim dgrItem As DataGridViewRow
 
     If (p_iCard >= 0) Then
@@ -135,6 +139,10 @@ Public Class frmMain
   End Sub
 
   Private Sub btnPause_Click(sender As Object, e As EventArgs) Handles btnPause.Click
+    PauseFile()
+  End Sub
+
+  Private Sub PauseFile()
     Dim eResult As API.STATUS
 
     If (p_iCard >= 0) Then
@@ -158,6 +166,10 @@ Public Class frmMain
   End Sub
 
   Private Sub btnPreviousFile_Click(sender As Object, e As EventArgs) Handles btnPreviousFile.Click
+    PreviousFile()
+  End Sub
+
+  Private Sub PreviousFile()
     Dim dgrItem As DataGridViewRow
     Dim iIndex As Integer
     Dim bFoundAnother As Boolean
@@ -187,6 +199,10 @@ Public Class frmMain
   End Sub
 
   Private Sub btnNextFile_Click(sender As Object, e As EventArgs) Handles btnNextFile.Click
+    NextFile()
+  End Sub
+
+  Private Sub NextFile()
     Dim dgrItem As DataGridViewRow
     Dim iIndex As Integer
     Dim bFoundAnother As Boolean
@@ -614,7 +630,36 @@ Public Class frmMain
   End Sub
 
   Private Function AbsoluteCurrentPosition() As Decimal
-    Return (p_iLastStartPercent + (p_dCurrentPercent * ((100 - p_iLastStartPercent) / 100))) * (dgvFiles.Rows(p_iCurrentlyPlayingFile).Cells(dgcEndPercent.Index).Value / 100)
+    Dim dCurrentPercent As Decimal
+
+    If p_iCurrentlyPlayingFile >= 0 Then
+      dCurrentPercent = (p_iLastStartPercent + (p_dCurrentPercent * ((100 - p_iLastStartPercent) / 100))) * (dgvFiles.Rows(p_iCurrentlyPlayingFile).Cells(dgcEndPercent.Index).Value / 100)
+    Else
+      dCurrentPercent = 0
+    End If
+
+    Return dCurrentPercent
   End Function
 
+  Private Sub frmMain_KeyDown(sender As Object, e As KeyEventArgs) Handles MyBase.KeyDown
+    If e.Control Then
+      Select Case e.KeyCode
+        Case Keys.Z
+          If Me.gbPlayback.Enabled Then PreviousFile()
+
+        Case Keys.X
+          If Me.gbPlayback.Enabled Then PlayFile()
+
+        Case Keys.C
+          If Me.gbPlayback.Enabled Then PauseFile()
+
+        Case Keys.V
+          If Me.gbPlayback.Enabled Then StopPlayback()
+
+        Case Keys.B
+          If Me.gbPlayback.Enabled Then NextFile()
+
+      End Select
+    End If
+  End Sub
 End Class

@@ -91,7 +91,7 @@ Partial Class frmMain
     Me.btnInitialize.Name = "btnInitialize"
     Me.btnInitialize.Size = New System.Drawing.Size(75, 23)
     Me.btnInitialize.TabIndex = 2
-    Me.btnInitialize.Text = "Initialize"
+    Me.btnInitialize.Text = "&Initialize"
     Me.btnInitialize.UseVisualStyleBackColor = True
     '
     'dlgOpenFiles
@@ -106,7 +106,7 @@ Partial Class frmMain
     Me.btnGetFilename.Name = "btnGetFilename"
     Me.btnGetFilename.Size = New System.Drawing.Size(90, 23)
     Me.btnGetFilename.TabIndex = 13
-    Me.btnGetFilename.Text = "Curr. File Name"
+    Me.btnGetFilename.Text = "&Curr. File Name"
     Me.btnGetFilename.UseVisualStyleBackColor = True
     '
     'lblChannel
@@ -124,7 +124,7 @@ Partial Class frmMain
     Me.btnAssignChannel.Name = "btnAssignChannel"
     Me.btnAssignChannel.Size = New System.Drawing.Size(75, 23)
     Me.btnAssignChannel.TabIndex = 6
-    Me.btnAssignChannel.Text = "Assign"
+    Me.btnAssignChannel.Text = "Assig&n"
     Me.btnAssignChannel.UseVisualStyleBackColor = True
     '
     'lblSkipPercent
@@ -134,7 +134,7 @@ Partial Class frmMain
     Me.lblSkipPercent.Name = "lblSkipPercent"
     Me.lblSkipPercent.Size = New System.Drawing.Size(39, 13)
     Me.lblSkipPercent.TabIndex = 7
-    Me.lblSkipPercent.Text = "Skip %"
+    Me.lblSkipPercent.Text = "Ski&p %"
     '
     'lblFFPercent
     '
@@ -143,7 +143,7 @@ Partial Class frmMain
     Me.lblFFPercent.Name = "lblFFPercent"
     Me.lblFFPercent.Size = New System.Drawing.Size(57, 13)
     Me.lblFFPercent.TabIndex = 5
-    Me.lblFFPercent.Text = "FF/Rew %"
+    Me.lblFFPercent.Text = "FF/Re&w %"
     '
     'btnSkipFwd
     '
@@ -151,7 +151,7 @@ Partial Class frmMain
     Me.btnSkipFwd.Name = "btnSkipFwd"
     Me.btnSkipFwd.Size = New System.Drawing.Size(75, 23)
     Me.btnSkipFwd.TabIndex = 12
-    Me.btnSkipFwd.Text = "Skip Fwd"
+    Me.btnSkipFwd.Text = "&Skip Fwd"
     Me.btnSkipFwd.UseVisualStyleBackColor = True
     '
     'btnFastFwd
@@ -160,7 +160,7 @@ Partial Class frmMain
     Me.btnFastFwd.Name = "btnFastFwd"
     Me.btnFastFwd.Size = New System.Drawing.Size(75, 23)
     Me.btnFastFwd.TabIndex = 11
-    Me.btnFastFwd.Text = "Fast Fwd"
+    Me.btnFastFwd.Text = "&Fast Fwd"
     Me.btnFastFwd.UseVisualStyleBackColor = True
     '
     'btnRewind
@@ -169,7 +169,7 @@ Partial Class frmMain
     Me.btnRewind.Name = "btnRewind"
     Me.btnRewind.Size = New System.Drawing.Size(75, 23)
     Me.btnRewind.TabIndex = 10
-    Me.btnRewind.Text = "Rewind"
+    Me.btnRewind.Text = "&Rewind"
     Me.btnRewind.UseVisualStyleBackColor = True
     '
     'btnSkipBack
@@ -178,7 +178,7 @@ Partial Class frmMain
     Me.btnSkipBack.Name = "btnSkipBack"
     Me.btnSkipBack.Size = New System.Drawing.Size(75, 23)
     Me.btnSkipBack.TabIndex = 9
-    Me.btnSkipBack.Text = "Skip Back"
+    Me.btnSkipBack.Text = "Skip &Back"
     Me.btnSkipBack.UseVisualStyleBackColor = True
     '
     'tmrProcessCallbackResults
@@ -408,7 +408,7 @@ Partial Class frmMain
     Me.btnMoveDown.Name = "btnMoveDown"
     Me.btnMoveDown.Size = New System.Drawing.Size(75, 23)
     Me.btnMoveDown.TabIndex = 4
-    Me.btnMoveDown.Text = "Move Down"
+    Me.btnMoveDown.Text = "Move &Down"
     Me.btnMoveDown.UseVisualStyleBackColor = True
     '
     'btnMoveUp
@@ -418,7 +418,7 @@ Partial Class frmMain
     Me.btnMoveUp.Name = "btnMoveUp"
     Me.btnMoveUp.Size = New System.Drawing.Size(75, 23)
     Me.btnMoveUp.TabIndex = 3
-    Me.btnMoveUp.Text = "Move Up"
+    Me.btnMoveUp.Text = "Move &Up"
     Me.btnMoveUp.UseVisualStyleBackColor = True
     '
     'btnRemove
@@ -428,7 +428,7 @@ Partial Class frmMain
     Me.btnRemove.Name = "btnRemove"
     Me.btnRemove.Size = New System.Drawing.Size(75, 23)
     Me.btnRemove.TabIndex = 2
-    Me.btnRemove.Text = "Remove"
+    Me.btnRemove.Text = "Re&move"
     Me.btnRemove.UseVisualStyleBackColor = True
     '
     'btnAdd
@@ -438,7 +438,7 @@ Partial Class frmMain
     Me.btnAdd.Name = "btnAdd"
     Me.btnAdd.Size = New System.Drawing.Size(75, 23)
     Me.btnAdd.TabIndex = 1
-    Me.btnAdd.Text = "Add"
+    Me.btnAdd.Text = "&Add"
     Me.btnAdd.UseVisualStyleBackColor = True
     '
     'gbStatus
@@ -507,6 +507,7 @@ Partial Class frmMain
     Me.Controls.Add(Me.gbPlaylist)
     Me.Controls.Add(Me.gbPlayback)
     Me.Controls.Add(Me.gbInitialization)
+    Me.KeyPreview = True
     Me.Name = "frmMain"
     Me.Text = "HDTV998 Control App"
     Me.gbInitialization.ResumeLayout(False)
