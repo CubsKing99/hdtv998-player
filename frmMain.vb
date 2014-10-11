@@ -26,14 +26,15 @@ Public Class frmMain
     End If
 
     If (IsNumeric(nudCard.Value)) Then
-      p_iCard = nudCard.Value
-      eResult = API.Initialize973(p_iCard)
+      p_iCard = Convert.ToInt32(nudCard.Value)
+      eResult = DirectCast(API.Initialize973(p_iCard), API.STATUS)
       If (eResult = STATUS.STATUS_FAILURE) Then
         txtStatus.Text = "STATUS_FAILURE"
         p_iCard = -1
       ElseIf (eResult = STATUS.STATUS_SUCCESS) Then
         txtStatus.Text = String.Format("Card {0} initialized", p_iCard)
         SetupCallbacks()
+        Me.gbPlayback.Enabled = True
       Else
         txtStatus.Text = String.Format("Status = {0}", eResult)
         p_iCard = -1
@@ -156,6 +157,64 @@ Public Class frmMain
     StopPlayback()
   End Sub
 
+  Private Sub btnPreviousFile_Click(sender As Object, e As EventArgs) Handles btnPreviousFile.Click
+    Dim dgrItem As DataGridViewRow
+    Dim iIndex As Integer
+    Dim bFoundAnother As Boolean
+
+    If (p_iCard >= 0) Then
+      If p_iCurrentlyPlayingFile = 0 Then
+        MessageBox.Show("You are playing the first item in the playlist.  There is no previous file to play.", "No Previous File", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+      ElseIf p_iCurrentlyPlayingFile < 0 Then
+        MessageBox.Show("There are no files currently playing.", "No Files Playing", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+      Else
+        bFoundAnother = False
+        For iIndex = p_iCurrentlyPlayingFile - 1 To 0 Step -1
+          dgrItem = dgvFiles.Rows(iIndex)
+          If (Not bFoundAnother) AndAlso (dgrItem.Cells(dgcCheckbox.Index).Value) Then
+            bFoundAnother = True
+            StartPlayback(dgrItem.Index)
+          End If
+        Next
+
+        If Not bFoundAnother Then
+          MessageBox.Show("You are playing the first selected item in the playlist.  There are no previous files to play.", "No Previous Files", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
+      End If
+    Else
+      MessageBox.Show("You must initialize a card.", "Initialize Card", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End If
+  End Sub
+
+  Private Sub btnNextFile_Click(sender As Object, e As EventArgs) Handles btnNextFile.Click
+    Dim dgrItem As DataGridViewRow
+    Dim iIndex As Integer
+    Dim bFoundAnother As Boolean
+
+    If (p_iCard >= 0) Then
+      If p_iCurrentlyPlayingFile = dgvFiles.RowCount - 1 Then
+        MessageBox.Show("You are playing the last item in the playlist.  There is no next file to play.", "No Next Files", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+      ElseIf p_iCurrentlyPlayingFile < 0 Then
+        MessageBox.Show("There are no files currently playing.", "No Files Playing", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+      Else
+        bFoundAnother = False
+        For iIndex = p_iCurrentlyPlayingFile + 1 To dgvFiles.RowCount - 1
+          dgrItem = dgvFiles.Rows(iIndex)
+          If (Not bFoundAnother) AndAlso (dgrItem.Cells(dgcCheckbox.Index).Value) Then
+            bFoundAnother = True
+            StartPlayback(dgrItem.Index)
+          End If
+        Next
+
+        If Not bFoundAnother Then
+          MessageBox.Show("You are playing the last selected item in the playlist.  There is no next file to play.", "No Next File", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+        End If
+      End If
+    Else
+      MessageBox.Show("You must initialize a card.", "Initialize Card", MessageBoxButtons.OK, MessageBoxIcon.Error)
+    End If
+  End Sub
+
   Private Sub btnGetFilename_Click(sender As Object, e As EventArgs) Handles btnGetFilename.Click
     Dim eResult As API.STATUS
     Dim iptrFilename As IntPtr
@@ -170,7 +229,8 @@ Public Class frmMain
         txtStatus.Text = "STATUS_FAILURE"
       ElseIf (eResult = API.STATUS.STATUS_SUCCESS) Then
         sFilename = SRIM.PtrToStringAnsi(iptrFilename)
-        txtStatus.Text = String.Format("Filename = {0}", sFilename)
+        'txtStatus.Text = String.Format("Filename = {0}", sFilename)
+        MessageBox.Show(String.Format("Filename = {0}{1}{1}Current Position is {2}%.", sFilename, Environment.NewLine, AbsoluteCurrentPosition()), "Current File", MessageBoxButtons.OK, MessageBoxIcon.Information)
         Try
           SRIM.FreeHGlobal(iptrFilename)
         Catch ex As Exception
@@ -469,6 +529,10 @@ Public Class frmMain
 #End Region
 
   Private Sub frmMain_Load(sender As Object, e As EventArgs) Handles Me.Load
+    'Load the form size
+    Me.Width = My.Settings.iWidth
+    Me.Height = My.Settings.iHeight
+
     'Load the data grid
     If System.IO.File.Exists(My.Settings.XMLFileListPath) Then
       Try
@@ -511,6 +575,10 @@ Public Class frmMain
   End Sub
 
   Private Sub frmMain_FormClosing(sender As Object, e As FormClosingEventArgs) Handles Me.FormClosing
+    'Save the form size
+    My.Settings.iWidth = Me.Width
+    My.Settings.iHeight = Me.Height
+
     'Save data from the grid
     Try
       Dim datPlaylist As New Playlist
@@ -546,7 +614,7 @@ Public Class frmMain
   End Sub
 
   Private Function AbsoluteCurrentPosition() As Decimal
-    Return p_iLastStartPercent + (p_dCurrentPercent * ((100 - p_iLastStartPercent) / 100))
+    Return (p_iLastStartPercent + (p_dCurrentPercent * ((100 - p_iLastStartPercent) / 100))) * (dgvFiles.Rows(p_iCurrentlyPlayingFile).Cells(dgcEndPercent.Index).Value / 100)
   End Function
 
 End Class
