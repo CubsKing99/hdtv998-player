@@ -222,13 +222,18 @@ Public Class frmMain
   Private Sub StartPlayback(ByVal iFileIndex As Integer, ByVal sFileName As String, ByVal iStartPercent As Integer, ByVal iEndPercent As Integer)
     Dim eResult As API.STATUS
 
-    'Don't let it get outside of the 0-99 range
+    'Don't let it start outside of the 0-99 range
     If iStartPercent >= 100 Then
       iStartPercent = 99
     ElseIf iStartPercent < 0 Then
       iStartPercent = 0
     End If
     p_iLastStartPercent = iStartPercent
+
+    'It can't end later than the end of the stream.
+    If iStartPercent >= iEndPercent Then
+      iStartPercent = iEndPercent - 1
+    End If
 
     'If we're already playing something, stop playback.
     If Me.p_iCurrentlyPlayingFile >= 0 Then
@@ -383,6 +388,7 @@ Public Class frmMain
       For Each sFilename In dlgOpenFiles.FileNames
         drFile = New DataGridViewRow
         drFile.Cells.Add(New DataGridViewCheckBoxCell)
+        drFile.Cells(0).Value = True 'Assume if you're adding it to the playlist, you'll want to, you know, play it...
         tbcItem = New DataGridViewTextBoxCell
         tbcItem.Value = sFilename
         drFile.Cells.Add(tbcItem)
@@ -400,8 +406,8 @@ Public Class frmMain
   Private Sub btnRemove_Click(sender As Object, e As EventArgs) Handles btnRemove.Click
     Dim iSelectedIndex As Integer
 
-    If (dgvFiles.SelectedRows.Count > 0) Then
-      iSelectedIndex = dgvFiles.SelectedRows(0).Index
+    If (dgvFiles.SelectedCells.Count > 0) Then
+      iSelectedIndex = dgvFiles.SelectedCells(0).OwningRow.Index
       If p_iCurrentlyPlayingFile = iSelectedIndex Then
         MessageBox.Show("You cannot remove the currently playing file.  Please stop playback first.", "Stop Playback First", MessageBoxButtons.OK, MessageBoxIcon.Error)
       ElseIf p_iCurrentlyPlayingFile > iSelectedIndex Then
@@ -410,6 +416,8 @@ Public Class frmMain
       Else
         dgvFiles.Rows.RemoveAt(iSelectedIndex)
       End If
+    Else
+      MessageBox.Show("You must select a file.", "Select a File", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
     End If
   End Sub
 
@@ -418,7 +426,7 @@ Public Class frmMain
     Dim iSelectedCell As Integer
     Dim dgrSelected As DataGridViewRow
 
-    If (dgvFiles.SelectedRows.Count > 0) Then
+    If (dgvFiles.SelectedCells.Count > 0) Then
       iSelectedRow = dgvFiles.SelectedCells(0).OwningRow.Index
       If (iSelectedRow = 0) Then
         MessageBox.Show("You can't move the first row up!", "Not Gonna Do It", MessageBoxButtons.OK, MessageBoxIcon.Information)
@@ -440,7 +448,7 @@ Public Class frmMain
     Dim iSelectedCell As Integer
     Dim dgrSelected As DataGridViewRow
 
-    If (dgvFiles.SelectedRows.Count > 0) Then
+    If (dgvFiles.SelectedCells.Count > 0) Then
       iSelectedRow = dgvFiles.SelectedCells(0).OwningRow.Index
       If (iSelectedRow = dgvFiles.Rows.Count) Then
         MessageBox.Show("You can't move the last row down!", "Not Gonna Do It", MessageBoxButtons.OK, MessageBoxIcon.Information)
