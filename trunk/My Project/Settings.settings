@@ -35,5 +35,14 @@
     <Setting Name="bAbsolutePosition" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="iWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">413</Value>
+    </Setting>
+    <Setting Name="iHeight" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">487</Value>
+    </Setting>
+    <Setting Name="iFileNameColWidth" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">300</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

@@ -114,17 +114,17 @@ Namespace My
             End Set
         End Property
         
-    <Global.System.Configuration.UserScopedSettingAttribute(), _
-     Global.System.Diagnostics.DebuggerNonUserCodeAttribute(), _
-     Global.System.Configuration.DefaultSettingValueAttribute("False")> _
-    Public Property bRepeat() As Boolean
-      Get
-        Return CType(Me("bRepeat"), Boolean)
-      End Get
-      Set(value As Boolean)
-        Me("bRepeat") = value
-      End Set
-    End Property
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
+        Public Property bRepeat() As Boolean
+            Get
+                Return CType(Me("bRepeat"),Boolean)
+            End Get
+            Set
+                Me("bRepeat") = value
+            End Set
+        End Property
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -183,6 +183,42 @@ Namespace My
             End Get
             Set
                 Me("bAbsolutePosition") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("413")>  _
+        Public Property iWidth() As Integer
+            Get
+                Return CType(Me("iWidth"),Integer)
+            End Get
+            Set
+                Me("iWidth") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("487")>  _
+        Public Property iHeight() As Integer
+            Get
+                Return CType(Me("iHeight"),Integer)
+            End Get
+            Set
+                Me("iHeight") = value
+            End Set
+        End Property
+        
+        <Global.System.Configuration.UserScopedSettingAttribute(),  _
+         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.Configuration.DefaultSettingValueAttribute("300")>  _
+        Public Property iFileNameColWidth() As Integer
+            Get
+                Return CType(Me("iFileNameColWidth"),Integer)
+            End Get
+            Set
+                Me("iFileNameColWidth") = value
             End Set
         End Property
     End Class
